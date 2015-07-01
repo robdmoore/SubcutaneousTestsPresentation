@@ -42,11 +42,17 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AspNet.Mvc.Grid">
+      <HintPath>..\packages\AspNet.Mvc.Grid.1.0.1\lib\NET45\AspNet.Mvc.Grid.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
     </Reference>
     <Reference Include="ChameleonForms">
       <HintPath>..\packages\ChameleonForms.1.2.0.16\lib\NET40\ChameleonForms.dll</HintPath>
@@ -162,8 +168,9 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Css\bootstrap-theme.css.map" />
     <Content Include="Content\Css\bootstrap.css.map" />
+    <Content Include="Features\ViewUsers\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Icon.png" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -192,23 +199,43 @@
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\IDateTimeProvider.cs" />
     <Compile Include="Domain\ObjectConstructorHelpers.cs" />
+    <Compile Include="Domain\Users\Password.cs" />
+    <Compile Include="Domain\Users\PostalAddress.cs" />
+    <Compile Include="Domain\Users\PersonalDetails.cs" />
     <Compile Include="Domain\Users\User.cs" />
     <Compile Include="Features\BaseController.cs" />
     <Compile Include="Features\BasePage.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
+    <Compile Include="Features\ViewUsers\GetAllUsersQuery.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\PersistenceModule.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\QueryModule.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\WebModule.cs" />
+    <Compile Include="Infrastructure\Queries\IQuery.cs" />
+    <Compile Include="Infrastructure\Queries\QueryAdapter.cs" />
+    <Compile Include="Infrastructure\Queries\QueryExecutor.cs" />
     <Compile Include="Features\UserRegistration\UserRegistrationController.cs" />
+    <Compile Include="Features\ViewUsers\ViewUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Config\SqlConnectionString.cs" />
     <Compile Include="Infrastructure\Database\ForeignKeyNamingConvention.cs" />
     <Compile Include="Infrastructure\Database\SubcutaneousTestsPresentationDbContext.cs" />
+    <Compile Include="Migrations\201507011628442_AddUserTable.cs" />
+    <Compile Include="Migrations\201507011628442_AddUserTable.Designer.cs">
+      <DependentUpon>201507011628442_AddUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\FeaturesViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201507011628442_AddUserTable.resx">
+      <DependentUpon>201507011628442_AddUserTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

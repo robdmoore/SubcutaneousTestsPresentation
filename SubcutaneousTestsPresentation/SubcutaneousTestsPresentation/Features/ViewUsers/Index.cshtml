@@ -1,0 +1,17 @@
+﻿@using AspNet.Mvc.Grid
+@model IList<SubcutaneousTestsPresentation.Domain.Users.User>
+
+@{
+    PageTitle = "View all users";
+}
+
+<h1>View all users</h1>
+
+@Html.Grid(Model).Columns(cb =>
+{
+    cb.For(m => m.PersonalDetails.FirstName);
+    cb.For(m => m.PersonalDetails.LastName);
+    cb.For(m => m.PersonalDetails.Email);
+    cb.For(m => m.PostalAddress.City);
+    cb.For(m => m.CreatedDate);
+})
