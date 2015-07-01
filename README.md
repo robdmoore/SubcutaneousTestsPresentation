@@ -16,3 +16,7 @@ We will talk about what subcutaneous tests are, why they are useful and how we w
 
 This presentation was first delivered to the [Perth .NET user group](http://www.meetup.com/PerthDotNet/events/223510992/) on July 2nd 2015.
 
+Notes
+-----
+
+In order to show off all of the techniques I use with subcutaneous testing the example code contains patterns that would be complete overkill for such a simple application. Those patterns come into their own when the application grows in complexity and they help to illustrate what the subcutaneous tests can look like for a non-trivial codebase.
