@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.SqlServer;
-using SubcutaneousTestsPresentation.Infrastructure.Config;
 using SubcutaneousTestsPresentation.Domain.Users;
 using SubcutaneousTestsPresentation.Migrations;
 
@@ -21,7 +20,7 @@ namespace SubcutaneousTestsPresentation.Infrastructure.Database
         /// </summary>
         public SubcutaneousTestsPresentationDbContext() : base("SubcutaneousTestsPresentation") {}
 
-        public SubcutaneousTestsPresentationDbContext(SqlConnectionString connectionString) : base(connectionString.Value) {}
+        public SubcutaneousTestsPresentationDbContext(string connectionString) : base(connectionString) {}
 
         public SubcutaneousTestsPresentationDbContext(DbConnection connection) : base(connection, false) { }
 

@@ -1,12 +1,11 @@
-﻿using System.Net;
+﻿using System.Configuration;
+using System.Net;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac.Integration.Mvc;
 using ChameleonForms;
-using ConfigInjector.QuickAndDirty;
 using Owin;
-using SubcutaneousTestsPresentation.Infrastructure.Config;
 using SubcutaneousTestsPresentation.Infrastructure.Database;
 using SubcutaneousTestsPresentation.Views;
 
@@ -19,7 +18,7 @@ namespace SubcutaneousTestsPresentation
             var container = ContainerConfig.CreateContainer();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            var connectionString = DefaultSettingsReader.Get<SqlConnectionString>();
+            var connectionString = ConfigurationManager.ConnectionStrings["SubcutaneousTestsPresentation"].ConnectionString;
             new SubcutaneousTestsPresentationDbContext(connectionString).Database.Initialize(false);
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);

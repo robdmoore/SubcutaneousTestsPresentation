@@ -1,7 +1,6 @@
 ﻿using System;
 using Autofac;
 using Autofac.Core.Lifetime;
-using SubcutaneousTestsPresentation.Infrastructure.Config;
 
 namespace SubcutaneousTestsPresentation.Tests.TestHelpers.Fixtures
 {
@@ -26,10 +25,6 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers.Fixtures
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .InstancePerTestRun();
-
-            cb.RegisterInstance(DatabaseFixture.SqlConnectionString)
-                .AsSelf()
-                .SingleInstance();
         }
     }
 }

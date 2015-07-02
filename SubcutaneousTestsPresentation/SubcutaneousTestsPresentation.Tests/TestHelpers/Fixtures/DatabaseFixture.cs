@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Data.Common;
 using System.IO;
-using SubcutaneousTestsPresentation.Infrastructure.Config;
 using SubcutaneousTestsPresentation.Infrastructure.Database;
 
 namespace SubcutaneousTestsPresentation.Tests.TestHelpers.Fixtures
 {
     public class DatabaseFixture : IDisposable
     {
-        public static SqlConnectionString SqlConnectionString = new SqlConnectionString
-            {
-                Value = "Data Source=(LocalDb)\\v11.0;Initial Catalog=SubcutaneousTestsPresentation.Tests;Integrated Security=True;AttachDBFilename=|DataDirectory|\\SubcutaneousTestsPresentation.Tests.mdf"
-            };
         private readonly SubcutaneousTestsPresentationDbContext _parentContext;
         private readonly DbTransaction _transaction;
 
@@ -28,7 +23,7 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers.Fixtures
 
         public DatabaseFixture()
         {
-            _parentContext = new SubcutaneousTestsPresentationDbContext(SqlConnectionString);
+            _parentContext = new SubcutaneousTestsPresentationDbContext();
             _parentContext.Database.Connection.Open();
             _transaction = _parentContext.Database.Connection.BeginTransaction();
 

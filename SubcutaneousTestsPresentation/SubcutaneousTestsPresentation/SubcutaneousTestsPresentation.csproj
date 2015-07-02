@@ -57,9 +57,6 @@
     <Reference Include="ChameleonForms">
       <HintPath>..\packages\ChameleonForms.1.2.0.16\lib\NET40\ChameleonForms.dll</HintPath>
     </Reference>
-    <Reference Include="ConfigInjector">
-      <HintPath>..\packages\ConfigInjector.1.1.0.175\lib\net45\ConfigInjector.dll</HintPath>
-    </Reference>
     <Reference Include="DataAnnotationsExtensions">
       <HintPath>..\packages\DataAnnotationsExtensions.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
     </Reference>
@@ -243,7 +240,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Config\SqlConnectionString.cs" />
     <Compile Include="Infrastructure\Database\ForeignKeyNamingConvention.cs" />
     <Compile Include="Infrastructure\Database\SubcutaneousTestsPresentationDbContext.cs" />
     <Compile Include="Infrastructure\Time\DateTimeProvider.cs" />
