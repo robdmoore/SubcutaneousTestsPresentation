@@ -7,7 +7,7 @@
     PageTitle = "Register a user";
 }
 
-<h1>Register a team</h1>
+<h1>Register a user</h1>
 
 @using (var f = Html.BeginChameleonForm())
 {
@@ -23,7 +23,7 @@
         @s.FieldFor(m => m.ConfirmPassword)
     }
 
-    using (var s = f.BeginSection("Team contact details"))
+    using (var s = f.BeginSection("User personal details"))
     {
         @s.FieldFor(m => m.PersonalDetails.Title).WithHint(Validation.TitleHint)
         @s.FieldFor(m => m.PersonalDetails.FirstName)

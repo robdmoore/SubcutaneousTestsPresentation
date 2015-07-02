@@ -22,12 +22,12 @@ namespace SubcutaneousTestsPresentation.Features.UserRegistration
         }
     }
 
-    public class RegisterTeamHandler : ICommandHandler<RegisterUser>
+    public class RegisterUserHandler : ICommandHandler<RegisterUser>
     {
         private readonly SubcutaneousTestsPresentationDbContext _context;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public RegisterTeamHandler(SubcutaneousTestsPresentationDbContext context, IDateTimeProvider dateTimeProvider)
+        public RegisterUserHandler(SubcutaneousTestsPresentationDbContext context, IDateTimeProvider dateTimeProvider)
         {
             _context = context;
             _dateTimeProvider = dateTimeProvider;
@@ -35,8 +35,8 @@ namespace SubcutaneousTestsPresentation.Features.UserRegistration
 
         public Task ExecuteAsync(RegisterUser command)
         {
-            var team = new User(_dateTimeProvider, command.PersonalDetails, command.Address, command.Password);
-            _context.Users.Add(team);
+            var user = new User(_dateTimeProvider, command.PersonalDetails, command.Address, command.Password);
+            _context.Users.Add(user);
 
             // todo: Send email
 

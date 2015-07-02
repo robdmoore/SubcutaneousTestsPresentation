@@ -77,12 +77,12 @@ namespace SubcutaneousTestsPresentation.Tests.Features.UserRegistration
             _savedUser.LastModifiedDate.ShouldBe(Resolve<IDateTimeProvider>().Now());
         }
         /*
-        public void AndSendARegistrationEmailToThePrimaryContactEmail()
+        public void AndSendARegistrationEmailToTheUser()
         {
             var emailService = Resolve<IEmailSendingService>();
             emailService.Received().SendRegistrationEmail(
-                _viewModel.TeamContact.Email,
-                string.Format("{0} {1}", _viewModel.TeamContact.FirstName, _viewModel.TeamContact.LastName),
+                _viewModel.PersonalDetails.Email,
+                string.Format("{0} {1}", _viewModel.PersonalDetails.FirstName, _viewModel.PersonalDetails.LastName),
                 "http://localhost/UserLogin",
                 false
             );
