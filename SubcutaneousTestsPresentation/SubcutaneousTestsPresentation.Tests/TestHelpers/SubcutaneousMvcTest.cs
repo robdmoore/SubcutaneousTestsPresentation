@@ -23,26 +23,23 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers
     public abstract class SubcutaneousMvcTest<TController> : IDisposable
         where TController : BaseController
     {
-        private readonly HttpSimulator _httpRequest;
-        private readonly ILifetimeScope _container;
-        private readonly DatabaseFixture _database;
-        protected TController Controller { get; set; }
-        protected ControllerResultTest<TController> ActionResult { get; set; }
-
         protected SubcutaneousMvcTest()
         {
             _database = new DatabaseFixture();
             _container = ContainerFixture.GetTestLifetimeScope(cb => cb
-                .Register(c => _database.WorkDbContext)
-                .AsSelf()
-                .AsImplementedInterfaces()
-                .InstancePerTestRun());
+                .Register(c => _database.WorkDbContext).AsSelf().AsImplementedInterfaces().InstancePerTestRun());
 
             RouteTable.Routes.Clear();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             _httpRequest = new HttpSimulator().SimulateRequest();
             Controller = _container.Resolve<TController>();
             Controller.ControllerContext = new ControllerContext(new HttpContextWrapper(HttpContext.Current), new RouteData(), Controller);
+        }
+
+        [Fact]
+        public virtual void ExecuteScenario()
+        {
+            this.BDDfy();
         }
 
         protected void ExecuteControllerAction(Expression<Func<TController, Task<ActionResult>>> action)
@@ -55,25 +52,9 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers
             ActionResult = Controller.WithCallTo(action);
         }
 
-        [Fact]
-        public virtual void ExecuteScenario()
-        {
-            this.BDDfy();
-        }
-
         protected T Resolve<T>()
         {
             return _container.Resolve<T>();
-        }
-
-        protected SubcutaneousTestsPresentationDbContext SeedDbContext { get { return _database.SeedDbContext; } }
-        protected SubcutaneousTestsPresentationDbContext VerifyDbContext { get { return _database.VerifyDbContext; } }
-
-        public void Dispose()
-        {
-            _httpRequest.Dispose();
-            _database.Dispose();
-            _container.Dispose();
         }
 
         protected void Approve(string textToApprove)
@@ -83,5 +64,22 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers
                 Approvals.Verify(textToApprove);
             }
         }
+
+        public void Dispose()
+        {
+            _httpRequest.Dispose();
+            _database.Dispose();
+            _container.Dispose();
+        }
+
+        protected SubcutaneousTestsPresentationDbContext SeedDbContext { get { return _database.SeedDbContext; } }
+        protected SubcutaneousTestsPresentationDbContext VerifyDbContext { get { return _database.VerifyDbContext; } }
+
+        private readonly HttpSimulator _httpRequest;
+        private readonly ILifetimeScope _container;
+        private readonly DatabaseFixture _database;
+        protected TController Controller { get; set; }
+        protected ControllerResultTest<TController> ActionResult { get; set; }
+
     }
 }
