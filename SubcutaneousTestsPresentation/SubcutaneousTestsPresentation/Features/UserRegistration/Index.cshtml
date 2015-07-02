@@ -1,0 +1,50 @@
+﻿@using ChameleonForms.Templates.TwitterBootstrap3
+@using SubcutaneousTestsPresentation.Features.UserRegistration
+@using Validation = SubcutaneousTestsPresentation.Features.Validation
+@model UserRegistrationViewModel
+
+@{
+    PageTitle = "Register a user";
+}
+
+<h1>Register a team</h1>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    if (Request.IsLocal)
+    {
+        <p class="alert alert-warning"><strong>Developer note:</strong> Emails will be sent to the <code>Email</code>.</p>
+    }
+
+    using (var s = f.BeginSection("Registration details"))
+    {
+        @s.FieldFor(m => m.PersonalDetails.Email)
+        @s.FieldFor(m => m.Password).WithHint(Validation.PasswordCriteriaText)
+        @s.FieldFor(m => m.ConfirmPassword)
+    }
+
+    using (var s = f.BeginSection("Team contact details"))
+    {
+        @s.FieldFor(m => m.PersonalDetails.Title).WithHint(Validation.TitleHint)
+        @s.FieldFor(m => m.PersonalDetails.FirstName)
+        @s.FieldFor(m => m.PersonalDetails.LastName)
+        @s.FieldFor(m => m.PersonalDetails.Telephone).WithHint(Validation.PhoneHint).Placeholder(Validation.PhonePlaceholder)
+        @s.FieldFor(m => m.PersonalDetails.Fax).WithHint(Validation.PhoneHint).Placeholder(Validation.PhonePlaceholder)
+    }
+
+    using (var s = f.BeginSection("Postal address"))
+    {
+        @s.FieldFor(m => m.PostalAddress.AddressLine1)
+        @s.FieldFor(m => m.PostalAddress.AddressLine2)
+        @s.FieldFor(m => m.PostalAddress.AddressLine3)
+        @s.FieldFor(m => m.PostalAddress.City)
+        @s.FieldFor(m => m.PostalAddress.State)
+        @s.FieldFor(m => m.PostalAddress.Postcode).WithHint("Enter 'N/A' if your Country doesn't have postcodes")
+        @s.FieldFor(m => m.PostalAddress.Country)
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Register").WithIcon("th-list").WithStyle(EmphasisStyle.Success)
+    }
+}

@@ -16,6 +16,8 @@ namespace SubcutaneousTestsPresentation
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.validate.unobtrusive.chameleon.js",
                 "~/Scripts/jquery.validate.unobtrusive.twitterbootstrap.js",
+                // foolproof validation
+                "~/Scripts/mvcfoolproof.unobtrusive.js",
                 // Bootstrap
                 "~/Scripts/bootstrap.js"
                 ));
