@@ -75,11 +75,12 @@ namespace SubcutaneousTestsPresentation.Tests.TestHelpers
         protected SubcutaneousTestsPresentationDbContext SeedDbContext { get { return _database.SeedDbContext; } }
         protected SubcutaneousTestsPresentationDbContext VerifyDbContext { get { return _database.VerifyDbContext; } }
 
+        protected TController Controller { get; set; }
+        protected ControllerResultTest<TController> ActionResult { get; set; }
+
         private readonly HttpSimulator _httpRequest;
         private readonly ILifetimeScope _container;
         private readonly DatabaseFixture _database;
-        protected TController Controller { get; set; }
-        protected ControllerResultTest<TController> ActionResult { get; set; }
 
     }
 }
