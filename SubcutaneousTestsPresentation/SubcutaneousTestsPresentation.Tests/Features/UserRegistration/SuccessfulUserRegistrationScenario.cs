@@ -25,6 +25,7 @@ namespace SubcutaneousTestsPresentation.Tests.Features.UserRegistration
         public void WhenRegisteringTheUser()
         {
             ExecuteControllerAction(c => c.Index(_viewModel));
+
             _savedUser = VerifyDbContext.Users.SingleOrDefault();
         }
 
@@ -81,9 +82,8 @@ namespace SubcutaneousTestsPresentation.Tests.Features.UserRegistration
             var emailService = Resolve<IEmailSendingService>();
             emailService.Received().SendRegistrationEmail(
                 _viewModel.TeamContact.Email,
-                _viewModel.TeamContact.Title + " " + _viewModel.TeamContact.FirstName + " " + _viewModel.TeamContact.LastName,
-                _registeredUniversity.Name,
-                "http://localhost/TeamLogin",
+                string.Format("{0} {1}", _viewModel.TeamContact.FirstName, _viewModel.TeamContact.LastName),
+                "http://localhost/UserLogin",
                 false
             );
         }
