@@ -18,13 +18,13 @@
 
         protected PersonalDetails() { }
 
-        public PersonalDetails(string title, string firstName, string lastName, string email, string telephoneNumber, string fax)
+        public PersonalDetails(string title, string firstName, string lastName, string email, string telephone, string fax)
         {
             Title = title.OrThrowIfMissing("title");
             FirstName = firstName.OrThrowIfMissing("firstName");
             LastName = lastName.OrThrowIfMissing("lastName");
             Email = email.OrThrowIfMissing("email");
-            Telephone = telephoneNumber.OrThrowIfMissing("telephoneNumber");
+            Telephone = telephone.OrThrowIfMissing("telephoneNumber");
             Fax = fax;
         }
     }

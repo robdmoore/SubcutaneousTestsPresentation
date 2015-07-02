@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.SqlServer;
 using SubcutaneousTestsPresentation.Infrastructure.Config;
@@ -21,6 +22,8 @@ namespace SubcutaneousTestsPresentation.Infrastructure.Database
         public SubcutaneousTestsPresentationDbContext() : base("SubcutaneousTestsPresentation") {}
 
         public SubcutaneousTestsPresentationDbContext(SqlConnectionString connectionString) : base(connectionString.Value) {}
+
+        public SubcutaneousTestsPresentationDbContext(DbConnection connection) : base(connection, false) { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
