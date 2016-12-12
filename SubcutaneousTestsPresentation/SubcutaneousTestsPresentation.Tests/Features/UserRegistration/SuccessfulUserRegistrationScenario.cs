@@ -11,15 +11,9 @@ namespace SubcutaneousTestsPresentation.Tests.Features.UserRegistration
 {
     public class SuccessfulUserRegistrationScenario : SubcutaneousMvcTest<UserRegistrationController>
     {
-        private UserRegistrationViewModel _viewModel;
-        private User _savedUser;
-
         public void GivenValidUserRegistrationData()
         {
-            _viewModel = Builder<UserRegistrationViewModel>.CreateNew()
-                .Set(t => t.PersonalDetails, new UserPersonalDetailsViewModel(Builder<PersonalDetails>.CreateNew()))
-                .Set(t => t.PostalAddress, new UserPostalAddressViewModel(Builder<PostalAddress>.CreateNew()))
-                .Build();
+            _viewModel = Builder<UserRegistrationViewModel>.CreateNew().Build();
         }
 
         public void WhenRegisteringTheUser()
@@ -76,17 +70,22 @@ namespace SubcutaneousTestsPresentation.Tests.Features.UserRegistration
             _savedUser.CreatedDate.ShouldBe(Resolve<IDateTimeProvider>().Now());
             _savedUser.LastModifiedDate.ShouldBe(Resolve<IDateTimeProvider>().Now());
         }
-        /*
+        
         public void AndSendARegistrationEmailToTheUser()
         {
-            var emailService = Resolve<IEmailSendingService>();
-            emailService.Received().SendRegistrationEmail(
-                _viewModel.PersonalDetails.Email,
-                string.Format("{0} {1}", _viewModel.PersonalDetails.FirstName, _viewModel.PersonalDetails.LastName),
-                "http://localhost/UserLogin",
-                false
+            var emailService = Resolve<MockEmailSendingService>();
+            var sentEmail = emailService.SentEmails.Single();
+            sentEmail.ShouldSatisfyAllConditions(
+                () => sentEmail.To.Count.ShouldBe(1),
+                () => sentEmail.To.First().EmailAddress.ShouldBe(_viewModel.PersonalDetails.Email),
+                () => sentEmail.To.First().Name.ShouldBe($"{_viewModel.PersonalDetails.FirstName} {_viewModel.PersonalDetails.LastName}"),
+                () => sentEmail.Subject.ShouldBe("Welcome to Site X!")
             );
+
+            sentEmail.Body.ShouldMatchApproved();
         }
-        */
+        
+        private UserRegistrationViewModel _viewModel;
+        private User _savedUser;
     }
 }
